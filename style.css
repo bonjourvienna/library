@@ -1,0 +1,134 @@
+:root {
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --Modalshadow: rgba(0, 0, 0, 0.3) 0 4rem 6rem;
+  --headercolour: #e4d8cd;
+  --slate: #e2e8f0;
+  --fontcolour: #111827;
+  --default-radius: 7px;
+  --overlayColour: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--slate);
+  color: var(--fontcolour);
+  font-weight: 500;
+}
+
+header {
+  background-color: var(--headercolour);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  justify-content: space-around;
+}
+
+header,
+.container,
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+main {
+  margin: 0 auto;
+  padding: 20px;
+  flex-flow: column wrap;
+  gap: 2.5rem;
+}
+
+button:active {
+  transform: translateY(1.5px);
+}
+
+button,
+input[type="text"] {
+  border-radius: var(--default-radius);
+}
+
+.newBtn {
+  padding: 10px 25vw;
+  border: 0.6px solid #44403c;
+  box-shadow: var(--shadow);
+}
+
+.newBtn:hover {
+  background-color: var(--slate);
+  filter: brightness(95%);
+}
+
+/* FOOTER */
+footer {
+  justify-content: center;
+  gap: 0.5rem;
+}
+.gh {
+  width: 16px;
+}
+
+.gh:hover {
+  transform: scale(1.2);
+}
+
+/* MODAL */
+.modal {
+  background-color: var(--slate);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 5rem 6rem;
+  box-shadow: var(--Modalshadow);
+  z-index: 1;
+  transition: all 0.5s;
+  transform: translate(-50%, -50%);
+  border-radius: var(--default-radius);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: var(--overlayColour);
+  transition: all 0.5s;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modal__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.btn--close-modal {
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  font-size: 2rem;
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+input[type="text"] {
+  border: 1px solid #ddd;
+  outline: 0;
+}
+
+.btn,
+input[type="text"] {
+  padding: 10px;
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  background-color: #a8a29e;
+  filter: brightness(115%);
+}
