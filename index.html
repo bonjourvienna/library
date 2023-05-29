@@ -1,77 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <bmeta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vienna's Libary</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <header>
-      <h1 class="text-3xl font-bold">Library</h1>
-      <p>"Lorem ipsum dolor si amet."</p>
-      <button class="font-medium" id="loginBtn">Log in</button>
-    </header>
-    <main class="container">
-      <button class="newBtn font-bold text-lg" id="addBookBtn">+ New</button>
-      <div id="books-container">
-        <div id="book-card">
-          <!-- add books here with js script -->
-        </div>
-      </div>
-    </main>
-    <footer>
-      <p>
-        Copyright ©
-        <script>
-          document.write(new Date().getFullYear());
-        </script>
-        Vienna O.
-      </p>
-      <a href="http://github.com/viennao"
-        ><img class="gh" src="img/gh_logo.png" alt=""
-      /></a>
-    </footer>
 
-    <div class="modal hidden">
-      <button class="btn--close-modal">&times;</button>
-      <h2>Add new book</h2>
-      <form class="modal__form">
-        <input
-          type="text"
-          class="modal__form"
-          id="title"
-          placeholder="Title"
-          required
-          maxlength="100"
-        />
-        <input
-          type="text"
-          class="modal__form"
-          id="author"
-          placeholder="Author"
-          required
-          maxlength="100"
-        />
-        <input
-          type="text"
-          class="modal__form"
-          id="pages"
-          placeholder="Pages"
-          required
-          max="99999"
-        />
-        <div class="reading-status">
-          <input type="button" value="In Progress" />
-          <input type="button" value="Not Started" />
-          <input type="button" value="Completed" />
-        </div>
-        <button class="btn" type="submit">Submit</button>
-      </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <bmeta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vienna's Libary</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dist/output.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1 class="text-3xl font-bold">Library</h1>
+    <p>"Lorem ipsum dolor si amet."</p>
+    <button class="font-medium" id="loginBtn">Log in</button>
+  </header>
+  <main class="container">
+    <button class="newBtn font-bold text-lg" id="addBookBtn">+ New</button>
+    <div id="books-container">
+      <div id="book-card">
+        <!-- add books here with js script -->
+      </div>
     </div>
-    <div class="overlay hidden"></div>
-  </body>
+  </main>
+  <footer>
+    <p>
+      Copyright ©
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      Vienna O.
+    </p>
+    <a href="http://github.com/viennao" target="_blank"><img class="gh" src="img/gh_logo.png" alt="" /></a>
+  </footer>
+
+  <div class="modal hidden">
+    <button class="btn--close-modal">&times;</button>
+    <h2 class="font-bold">Add new book</h2>
+    <form class="modal__form">
+      <input type="text" class="modal__form" id="title" placeholder="Title" required maxlength="100" />
+      <input type="text" class="modal__form" id="author" placeholder="Author" required maxlength="100" />
+      <input type="text" class="modal__form" id="pages" placeholder="Pages" required max="99999" />
+      <div class="reading-status">
+        <input class="btn bg-red-400" type="button" value="Not Started" />
+        <input class="btn bg-yellow-400" type="button" value="In Progress" />
+        <input class="btn bg-green-400" type="button" value="Completed" />
+      </div>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="overlay hidden"></div>
+</body>
+
 </html>

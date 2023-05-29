@@ -23,9 +23,9 @@ header {
 
 header,
 .container,
-footer {
+footer,
+.reading-status {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -36,12 +36,13 @@ main {
   gap: 2.5rem;
 }
 
-button:active {
+button:active,
+input[type="button"]:active {
   transform: translateY(1.5px);
 }
 
 button,
-input[type="text"] {
+input {
   border-radius: var(--default-radius);
 }
 
@@ -128,7 +129,11 @@ input[type="text"] {
   box-shadow: var(--shadow);
 }
 
-.btn {
+button.btn {
   background-color: #a8a29e;
   filter: brightness(115%);
+}
+
+.reading-status {
+  gap: 1rem;
 }
