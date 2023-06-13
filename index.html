@@ -19,11 +19,31 @@
   </header>
   <main class="container">
     <button class="newBtn font-bold text-lg" id="addBookBtn">+ New</button>
-    <div id="books-container">
-      <div id="book-card">
-        <!-- add books here with js script -->
+    <div class="books-container">
+
+      <div class="book-card">
+        <p>1</p>
+        <p>THE ALCHEMIST</p>
+        <p>PAULO COELHO</p>
+        <p>300 pages</p>
+        <button class="btn Btn-Status bg-red-400">Not Started</button>
+      </div>
+      <div class="book-card">
+        <p>2</p>
+        <p>ATOMIC HABITS</p>
+        <p>JAMES CLEAR</p>
+        <p>360 pages</p>
+        <button class="btn Btn-Status bg-red-400">Not Started</button>
+      </div>
+      <div class="book-card">
+        <p>3</p>
+        <p>ATOMIC HABITS</p>
+        <p>JAMES CLEAR</p>
+        <p>360 pages</p>
+        <button class="btn Btn-Status bg-red-400">Not Started</button>
       </div>
     </div>
+
   </main>
   <footer>
     <p>
@@ -40,15 +60,15 @@
     <button class="btn--close-modal">&times;</button>
     <h2 class="font-bold">Add new book</h2>
     <form class="modal__form">
-      <input type="text" class="modal__form" id="title" placeholder="Title" required maxlength="100" />
-      <input type="text" class="modal__form" id="author" placeholder="Author" required maxlength="100" />
-      <input type="text" class="modal__form" id="pages" placeholder="Pages" required max="99999" />
+      <input type="text" class="modal__form" id="title" name="Book's Title" placeholder="Title" maxlength="100" />
+      <input type="text" class="modal__form" id="author" name="Author" placeholder="Author" maxlength="100" />
+      <input type="text" class="modal__form" id="pages" name="Pages" placeholder="Pages" />
       <div class="reading-status">
-        <input class="btn bg-red-400" type="button" value="Not Started" />
-        <input class="btn bg-yellow-400" type="button" value="In Progress" />
-        <input class="btn bg-green-400" type="button" value="Completed" />
+        <input class="btn bg-red-400" type="button" name="rs" value="Not Started" />
+        <input class="btn bg-yellow-400" type="button" name="rs" value="In Progress" />
+        <input class="btn bg-green-400" type="button" name="rs" value="Completed" />
       </div>
-      <button class="btn" type="submit">Submit</button>
+      <button class="btn submit" type="submit">Submit</button>
     </form>
   </div>
 
