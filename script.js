@@ -8,8 +8,16 @@ const BookStatusBtn = document.querySelectorAll(".Btn-Status");
 const BtnsStatus = document.querySelectorAll('input[type="button"]');
 const submitForm = document.querySelector(".submit");
 const library = document.querySelector(".books-container");
+const removeBtn = document.querySelector("removeBtn");
+let statusChosen = "";
+const myLibrary = [];
 
-const books = {};
+function Book(title, author, pages, status) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.status = status;
+}
 
 function openModal() {
   modal.classList.remove("hidden");
@@ -24,28 +32,15 @@ function closeModal() {
 function createNewBook(e) {
   e.preventDefault();
   const bookTitle = modalForm.elements.namedItem("title").value;
-  const AuthorName = modalForm.elements.namedItem("author").value;
-  const Pages = modalForm.elements.namedItem("pages").value;
-  const readingStatus = () => {
-    if (this.value) return (book.status = this.value);
-  };
+  const authorName = modalForm.elements.namedItem("author").value;
+  const pages = modalForm.elements.namedItem("pages").value;
 
-  const book = {
-    title: bookTitle,
-    author: AuthorName,
-    pages: Pages,
-    status: "",
-  };
-  const bookId = `book${Object.keys(books).length + 1}`;
-  books[bookId] = book;
+  const book = new Book(bookTitle, authorName, `${pages} pages`, statusChosen);
+
+  const bookId = `book${Object.keys(myLibrary).length + 1}`;
+  myLibrary[bookId] = book;
   console.log(book);
-  console.log(books);
-}
-
-function getStatus() {
-  if (this.value) {
-    console.log(this.value);
-  }
+  console.log(myLibrary);
 }
 
 function createBookCard(book) {
@@ -53,9 +48,11 @@ function createBookCard(book) {
   const title = document.createElement("p");
   const author = document.createElement("p");
   const pages = document.createElement("p");
-  const status = document.createElement("button");
+  const readingStatus = document.createElement("button");
+  const removeBtn = document.createElement("button");
 
   bookCard.classList.add("book-card");
+  removeBtn.classList.add("removeBtn");
 
   title.textContent = `"${book.title}"`;
   author.textContent = `${book.author}`;
@@ -64,8 +61,18 @@ function createBookCard(book) {
   bookCard.appendChild(title);
   bookCard.appendChild(author);
   bookCard.appendChild(pages);
-  bookCard.appendChild(status);
+  bookCard.appendChild(removeBtn);
 
+  if (book["readingStatus"] === BtnsStatus[0].value) {
+    readingStatus.classList.add("bg-red-400");
+    bookCard.appendChild(readingStatus);
+  } else if (book["readingStatus"] === BtnsStatus[1].value) {
+    readingStatus.classList.add("bg-yellow-400");
+    bookCard.appendChild(readingStatus);
+  } else if (book["readingStatus"] === BtnsStatus[2].value) {
+    readingStatus.classList.add("bg-green-400");
+    bookCard.appendChild(readingStatus);
+  }
   return bookCard;
 }
 
@@ -85,14 +92,20 @@ function EditReadingStatus() {
   }
 }
 
-function addBookToLibrary(e) {
-  e.preventDefault();
+function addBookToLibrary(book) {
+  // library.push(book);
 }
 
+function removeBook() {}
+
 modalForm.addEventListener("submit", createNewBook);
+modalForm.addEventListener("submit", addBookToLibrary);
 btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.addEventListener("click", closeModal);
+// removeBtn.addEventListener("click", removeBook);
 BookStatusBtn.forEach((btn) =>
   btn.addEventListener("click", EditReadingStatus)
 );
-BtnsStatus.forEach((btn) => btn.addEventListener("click", getStatus));
+BtnsStatus.forEach((btn) => {
+  btn.addEventListener("click", () => (statusChosen = btn.value));
+});
