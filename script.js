@@ -4,19 +4,20 @@ const overlay = document.querySelector(".overlay");
 const modal = document.querySelector(".modal");
 const bookCard = document.querySelectorAll(".book-card");
 const modalForm = document.querySelector("form.modal__form");
-const BookStatusBtn = document.querySelectorAll(".Btn-Status");
-const BtnsStatus = document.querySelectorAll('input[type="button"]');
+const btnsStatus = document.querySelectorAll('input[type="button"]');
 const submitForm = document.querySelector(".submit");
 const library = document.querySelector(".books-container");
 const removeBtn = document.querySelector("removeBtn");
-let statusChosen = "";
 const myLibrary = [];
+let statusChosen = "";
 
-function Book(title, author, pages, status) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+  }
 }
 
 function openModal() {
@@ -29,83 +30,97 @@ function closeModal() {
   overlay.classList.add("hidden");
 }
 
-function createNewBook(e) {
-  e.preventDefault();
+function getBookStatus(status) {
+  if (status === btnsStatus[0].value)
+    return btnsStatus[0].getAttribute("class");
+  else if (status === btnsStatus[1].value)
+    return btnsStatus[1].getAttribute("class");
+  else if (status === btnsStatus[2].value)
+    return btnsStatus[2].getAttribute("class");
+  else return "";
+}
+
+function updateStatus(book, statusBtn) {
+  const btns = document.querySelectorAll(".toggler");
+  btns.forEach((btn) => {
+    if (statusBtn.value === btnsStatus[0].value) {
+      btn.classList.replace(btnsStatus[0].className, btnsStatus[1].className);
+      btn.textContent = btnsStatus[1].value;
+    } else if (statusBtn.value === btnsStatus[1].value) {
+      btn.classList.replace(btnsStatus[0].className, btnsStatus[2].className);
+      btn.textContent = btnsStatus[2].value;
+    } else {
+      btn.textContent = btnsStatus[0].value;
+      btn.classList.replace(btnsStatus[0].className, btnsStatus[0].className);
+    }
+  });
+  book.status = statusBtn.value;
+}
+
+function createNewBook() {
   const bookTitle = modalForm.elements.namedItem("title").value;
   const authorName = modalForm.elements.namedItem("author").value;
   const pages = modalForm.elements.namedItem("pages").value;
 
+  const bookId = `book${Object.keys(myLibrary).length + 1}`;
   const book = new Book(bookTitle, authorName, `${pages} pages`, statusChosen);
 
-  const bookId = `book${Object.keys(myLibrary).length + 1}`;
   myLibrary[bookId] = book;
-  console.log(book);
-  console.log(myLibrary);
+  createBookCard(book, statusChosen);
 }
 
-function createBookCard(book) {
+function createBookCard(book, status) {
   const bookCard = document.createElement("div");
-  const title = document.createElement("p");
-  const author = document.createElement("p");
-  const pages = document.createElement("p");
-  const readingStatus = document.createElement("button");
-  const removeBtn = document.createElement("button");
-
   bookCard.classList.add("book-card");
-  removeBtn.classList.add("removeBtn");
 
+  const title = document.createElement("p");
   title.textContent = `"${book.title}"`;
-  author.textContent = `${book.author}`;
-  pages.textContent = `${book.pages}`;
-
   bookCard.appendChild(title);
+
+  const author = document.createElement("p");
+  author.textContent = `${book.author}`;
   bookCard.appendChild(author);
+
+  const pages = document.createElement("p");
+  pages.textContent = `${book.pages}`;
   bookCard.appendChild(pages);
+
+  const statusBtn = document.createElement("button");
+  statusBtn.setAttribute("class", getBookStatus(status));
+  statusBtn.textContent = status;
+  statusBtn.classList.add("toggler", "btn");
+  bookCard.appendChild(statusBtn);
+  statusBtn.addEventListener("click", updateStatus(status, status));
+
+  const removeBtn = document.createElement("button");
+  removeBtn.classList.add("btn", "removeBtn");
   bookCard.appendChild(removeBtn);
-
-  if (book["readingStatus"] === BtnsStatus[0].value) {
-    readingStatus.classList.add("bg-red-400");
-    bookCard.appendChild(readingStatus);
-  } else if (book["readingStatus"] === BtnsStatus[1].value) {
-    readingStatus.classList.add("bg-yellow-400");
-    bookCard.appendChild(readingStatus);
-  } else if (book["readingStatus"] === BtnsStatus[2].value) {
-    readingStatus.classList.add("bg-green-400");
-    bookCard.appendChild(readingStatus);
-  }
-  return bookCard;
+  removeBtn.textContent = "Remove";
+  removeBtn.addEventListener("click", () => {
+    removeBook(book);
+    bookCard.remove();
+  });
+  library.appendChild(bookCard);
 }
 
-function EditReadingStatus() {
-  if (this.classList.contains("bg-red-400")) {
-    this.classList.remove("bg-red-400");
-    this.classList.add("bg-yellow-400");
-    this.textContent = BtnsStatus[1].value;
-  } else if (this.classList.contains("bg-yellow-400")) {
-    this.classList.remove("bg-yellow-400");
-    this.classList.add("bg-green-400");
-    this.textContent = BtnsStatus[2].value;
-  } else if (this.classList.contains("bg-green-400")) {
-    this.classList.remove("bg-green-400");
-    this.classList.add("bg-red-400");
-    this.textContent = BtnsStatus[0].value;
+function removeBook(books) {
+  for (let i = 0; i < books.length; i++) {
+    const book = books[i];
+    const index = myLibrary.indexOf[book];
+    if (index !== -1) {
+      myLibrary.splice(index, 1);
+    }
   }
 }
 
-function addBookToLibrary(book) {
-  // library.push(book);
-}
-
-function removeBook() {}
-
-modalForm.addEventListener("submit", createNewBook);
-modalForm.addEventListener("submit", addBookToLibrary);
+const newBook = (e) => {
+  e.preventDefault();
+  const newBook = createNewBook();
+  createBookCard(newBook, statusChosen);
+};
+modalForm.addEventListener("submit", newBook);
 btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.addEventListener("click", closeModal);
-// removeBtn.addEventListener("click", removeBook);
-BookStatusBtn.forEach((btn) =>
-  btn.addEventListener("click", EditReadingStatus)
-);
-BtnsStatus.forEach((btn) => {
+btnsStatus.forEach((btn) => {
   btn.addEventListener("click", () => (statusChosen = btn.value));
 });
