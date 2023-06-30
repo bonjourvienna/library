@@ -14,7 +14,10 @@
 <body>
   <header>
     <h1 class="text-3xl font-bold">Library</h1>
-    <p>"Lorem ipsum dolor si amet."</p>
+    <div class="quotes">
+      <p>“If you’re brave enough to say goodbye, <br> life will reward you with a new hello.”</p>
+      <p> — Paulo Coelho</p>
+    </div>
     <button class="font-medium" id="loginBtn">Log in</button>
   </header>
   <main class="container">
@@ -33,17 +36,20 @@
     </p>
     <a href="http://github.com/viennao" target="_blank"><img class="gh" src="img/gh_logo.png" alt="" /></a>
   </footer>
+
   <div class="modal hidden">
     <button class="btn--close-modal">&times;</button>
     <h2 class="font-bold">Add new book</h2>
     <form class="modal__form">
-      <input type="text" class="modal__form" id="title" name="Book's Title" placeholder="Title" maxlength="100" />
-      <input type="text" class="modal__form" id="author" name="Author" placeholder="Author" maxlength="100" />
-      <input type="text" class="modal__form" id="pages" name="Pages" placeholder="Pages" />
+      <input type="text" class="modal__form" id="title" name="Book's Title" placeholder="Title" maxlength="100"
+        value="ATOMIC HABITS" required />
+      <input type="text" class="modal__form" id="author" name="Author" placeholder="Author" maxlength="100"
+        value="JAMES CLEAR" />
+      <input type="text" class="modal__form" id="pages" name="Pages" placeholder="Pages" value="360" required />
       <div class="reading-status">
-        <input class="btn bg-red-400" type="button" name="rs" value="Not Started" />
-        <input class="btn bg-yellow-400" type="button" name="rs" value="In Progress" />
-        <input class="btn bg-green-400" type="button" name="rs" value="Completed" />
+        <input class="bg-red-400" type="button" value="Not Started" />
+        <input class="bg-yellow-400" type="button" value="In Progress" />
+        <input class="bg-green-400" type="button" value="Completed" re />
       </div>
       <button class="btn submit" type="submit">Submit</button>
     </form>
